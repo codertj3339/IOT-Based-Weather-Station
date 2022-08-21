@@ -1,3 +1,7 @@
+//Sending Data from Arduino to NodeMCU Via Serial Communication
+//Arduino code
+
+//DHT11 Lib
 #include <DHT.h>
 
 //Arduino to NodeMCU Lib
@@ -54,20 +58,19 @@ void loop() {
   data["CO2 PPM Level"] = co2ppm;
 
   rain();
-  
-
-  smoke1();
-  data["Rain"] = smoke;
+  data["Rain"] = val;
   //Send data to NodeMCU
   data.printTo(nodemcu);
   jsonBuffer.clear();
+
+  smoke1();
 
   delay(2000);
 }
 
 void dht11_func() {
 
-  hum = dht.readHumidity();
+  hum = dht.readHumidity()-50;
   temp = dht.readTemperature();
   Serial.print("Humidity: ");
   Serial.println(hum);
@@ -128,3 +131,5 @@ void smoke1()
   Serial.println("AQI");
   Serial.println(smoke/3);
 }
+
+
