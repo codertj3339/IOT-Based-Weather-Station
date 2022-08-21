@@ -1,10 +1,12 @@
+//NodeMCU code
 #include "ThingSpeak.h"
 #include <ESP8266WiFi.h>
+//Include Lib for Arduino to Nodemcu
 #include <SoftwareSerial.h>
 #include <ArduinoJson.h>
 
-char ssid[] = "Ohh yeahh";   // your network SSID (name)
-char pass[] = "11112222";
+char ssid[] = "Galaxy M21A2EF";   // your network SSID (name)
+char pass[] = "password11";
 
 WiFiClient  client;
 
@@ -23,6 +25,7 @@ float co2ppm;
 float smoke;
 int x = 0;
 void setup() {
+  // Initialize Serial port
   Serial.begin(9600);
   nodemcu.begin(9600);
   WiFi.mode(WIFI_STA);
@@ -52,7 +55,7 @@ void loop() {
   co2ppm = data["CO2 PPM Level"];
   Serial.println(co2ppm);
   Serial.print("Rain value:  ");
-  smoke = data["Smoke"];
+  smoke = data["Rain"];
   Serial.println(smoke);
   Serial.println("-----------------------------------------");
   upload();
